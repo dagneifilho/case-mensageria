@@ -1,0 +1,9 @@
+using System;
+using ClienteService.Domain.Entities;
+
+namespace ClienteService.Domain.Interfaces;
+
+public interface IClienteRepository : IDisposable
+{
+    Task<Cliente> CreateAsync(Cliente cliente);
+}
