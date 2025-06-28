@@ -1,5 +1,6 @@
 using System;
 using ClienteService.Domain.Interfaces;
+using ClienteService.Infrastructure.Messaging;
 using MassTransit;
 
 namespace ClienteService.WebAPI.Configurations;
@@ -8,8 +9,9 @@ public static class MassTransitConfig
 {
     public static void AddMassTransitConfiguration(this IServiceCollection services)
     {
+        
         services.AddMassTransit(x =>
-        {
+        {            
             x.UsingRabbitMq((context, config) =>
             {
                 config.Host("localhost", "/", h =>
@@ -17,11 +19,11 @@ public static class MassTransitConfig
                     h.Username("guest");
                     h.Password("guest");
                 });
-                config.Message<IClienteCadastradoEvent>(x =>
-                {
-                    x.SetEntityName("cliente.exchange");
-                });
+                config.ConfigureEndpoints(context);
             });
         });
+
+        services.AddScoped<IEventPublisher, MassTransitEventPublisher>();
     }
 }
+

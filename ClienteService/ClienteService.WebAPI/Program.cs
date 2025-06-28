@@ -10,6 +10,13 @@ builder.Services.AddSwaggerGen();
 //configurações MassTransit
 builder.Services.AddMassTransitConfiguration();
 
+builder.Services.AddIoCConfiguration();
+
+builder.Services.ConfigureDatabase();
+
+builder.Services.AddControllers();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

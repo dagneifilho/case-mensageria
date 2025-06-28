@@ -3,7 +3,7 @@ using ClienteService.Domain.Interfaces;
 
 namespace ClienteService.Domain.Events;
 
-public class ClienteCadastradoEvent : IClienteCadastradoEvent
+public class ClienteCadastradoEvent
 {
     public Guid Id { get; set; }
     public string Nome { get; set; }

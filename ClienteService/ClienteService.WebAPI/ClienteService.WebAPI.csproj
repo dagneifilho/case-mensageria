@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="../ClienteService.Application/ClienteService.Application.csproj" />
     <ProjectReference Include="../ClienteService.Domain/ClienteService.Domain.csproj" />
+    <ProjectReference Include="../ClienteService.Infrastructure/ClienteService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
