@@ -3,8 +3,8 @@ using ClienteService.Application.DTO;
 using ClienteService.Application.Interfaces;
 using ClienteService.Domain.Entities;
 using ClienteService.Domain.Enums;
-using ClienteService.Domain.Events;
 using ClienteService.Domain.Interfaces;
+using Shared.Events;
 
 namespace ClienteService.Application.Services;
 

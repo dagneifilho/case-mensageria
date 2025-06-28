@@ -1,7 +1,6 @@
 using System;
-using ClienteService.Domain.Interfaces;
 
-namespace ClienteService.Domain.Events;
+namespace Shared.Events;
 
 public class ClienteCadastradoEvent
 {
