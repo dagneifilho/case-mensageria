@@ -7,7 +7,7 @@
     <UserSecretsId>dotnet-CreditoService.Worker-f9b70bdd-0114-4bec-9d69-bde6a243c68c</UserSecretsId>
   </PropertyGroup>
 
-   <ItemGroup>
+ <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="MassTransit" Version="8.5.0" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
@@ -15,11 +15,13 @@
   </ItemGroup>
 
    <ItemGroup>
+     <ProjectReference Include="../CreditoService.Appplication/CreditoService.Appplication.csproj" />
+     <ProjectReference Include="../CreditoService.Domain/CreditoService.Domain.csproj" />
+     <ProjectReference Include="../CreditoService.Infrastructure/CreditoService.Infrastructure.csproj" />
      <ProjectReference Include="../Shared/Shared.csproj" />
    </ItemGroup>
 
    <ItemGroup>
-     <Folder Include="Configurations/" />
      <Folder Include="Consumers/" />
    </ItemGroup>
 

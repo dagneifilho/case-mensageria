@@ -5,7 +5,8 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development",
+        "postgre":"Host=localhost;Port=5432;Database=clientesdb;Username=postgres;Password=minha_senha;"
       }
     }
   }
