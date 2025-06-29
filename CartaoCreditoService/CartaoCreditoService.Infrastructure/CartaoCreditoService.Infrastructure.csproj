@@ -1,4 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+ <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="MassTransit" Version="8.5.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.0" />
+    <PackageReference Include="Npgsql" Version="9.0.3" />
+  </ItemGroup>
+ <ItemGroup>
+   <ProjectReference Include="../CartaoCreditoService.Domain/CartaoCreditoService.Domain.csproj" />
+ </ItemGroup>
+ <ItemGroup>
+   <Folder Include="Messaging/" />
+ </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../CartaoCreditoService.Application/CartaoCreditoService.Application.csproj" />
     <ProjectReference Include="../CartaoCreditoService.Domain/CartaoCreditoService.Domain.csproj" />
+    <ProjectReference Include="../CartaoCreditoService.Infrastructure/CartaoCreditoService.Infrastructure.csproj" />
     <ProjectReference Include="../Shared/Shared.csproj" />
   </ItemGroup>
 

@@ -11,8 +11,5 @@
     <ProjectReference Include="../Shared/Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Shared" Version="1.0.0" />
-  </ItemGroup>
 
 </Project>
