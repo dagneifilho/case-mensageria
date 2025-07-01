@@ -47,6 +47,28 @@ public class ClientesAppService : IClientesAppService
 
     }
 
+    public async Task<IList<ClienteDetalhadoDto>> GetAll()
+    {
+        var clientesDb = await _clienteRepository.GetAllAsync();
+
+        var clientes = clientesDb.Select<ClienteDetalhado, ClienteDetalhadoDto>(c =>
+        {
+            return new ClienteDetalhadoDto
+            {
+                Id = c.ClienteId,
+                Nome = c.Nome,
+                Email = c.Email,
+                StatusCartao = c.StatusCartao.ToString(),
+                StatusProposta = c.StatusProposta.ToString(),
+                CartaoId = c.CartaoId,
+                NumeroCartao = c.NumeroCartao,
+                AprovacaoId = c.AprovacaoId
+            };
+        }).ToList();
+
+        return clientes;
+    }
+
 
     public async Task AtualizaCartaoCreditoCliente(Guid clienteId, bool sucesso = true)
     {

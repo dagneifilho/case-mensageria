@@ -76,6 +76,24 @@ public class ClienteRepository : IClienteRepository
 
         await _connection.ExecuteAsync(query, parameters);
     }
+
+    public async Task<IList<ClienteDetalhado>> GetAllAsync()
+    {
+        var query = @"SELECT
+                c.id AS ClienteId,
+                c.nome as Nome,
+                c.email as Email,
+                c.status_cartao as StatusCartao,
+                c.status_proposta as StatusProposta,
+                cc.id as CartaoId,
+                cc.numero_cartao as NumeroCartao,
+                ac.id AS AprovacaoId
+            FROM clientes c
+            LEFT JOIN cartoes_credito cc ON cc.cliente_id = c.id
+            LEFT JOIN aprovacoes_credito ac ON ac.cliente_id = c.id";
+
+        return (await _connection.QueryAsync<ClienteDetalhado>(query)).ToList();
+    }
     protected virtual void Dispose(bool disposing)
     {
         _connection.Dispose();
