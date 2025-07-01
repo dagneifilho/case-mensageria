@@ -1,8 +1,8 @@
 namespace ClienteService.Domain.Enums;
 
-public enum StatusCliente
+public enum Status
 {
-    EmProcessamento,
-    ProcessadoComSucesso,
-    ProcessadoComErros
+    EmProcessamento = 0,
+    ProcessadoComSucesso = 1,
+    ErroNoProcessamento = 2
 }

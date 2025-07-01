@@ -1,9 +1,9 @@
--- Tabela de clientes
 CREATE TABLE IF NOT EXISTS clientes (
     id UUID PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    status INTEGER NOT NULL
+    status_cartao INTEGER NOT NULL DEFAULT 0,
+    status_proposta INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS cartoes_credito (

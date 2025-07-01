@@ -1,4 +1,5 @@
 using System;
+using System.Reflection.Metadata;
 using ClienteService.Application.DTO;
 using ClienteService.Application.Interfaces;
 using ClienteService.Domain.Entities;
@@ -24,7 +25,6 @@ public class ClientesAppService : IClientesAppService
             Id = Guid.NewGuid(),
             Nome = cliente.Nome,
             Email = cliente.Email,
-            Status = StatusCliente.EmProcessamento
         };
 
         clienteDb = await _clienteRepository.CreateAsync(clienteDb);
@@ -41,9 +41,34 @@ public class ClientesAppService : IClientesAppService
             Id = clienteDb.Id,
             Nome = clienteDb.Nome,
             Email = clienteDb.Email,
-            Status = clienteDb.Status
+            StatusCartao = Status.EmProcessamento.ToString(),
+            StatusProposta = Status.EmProcessamento.ToString()
         };
 
+    }
+
+
+    public async Task AtualizaCartaoCreditoCliente(Guid clienteId, bool sucesso = true)
+    {
+        var cliente = await _clienteRepository.GetByIdAsync(clienteId);
+
+        if (cliente is null)
+            throw new KeyNotFoundException("Cliente não encontrado");
+
+        cliente.StatusCartao = sucesso ? Status.ProcessadoComSucesso : Status.ErroNoProcessamento;
+        await _clienteRepository.UpdateAsync(cliente);
+
+    }
+
+    public async Task AtualizaPropostaCreditoCliente(Guid clienteId, bool sucesso = true)
+    {
+        var cliente = await _clienteRepository.GetByIdAsync(clienteId);
+
+        if (cliente is null)
+            throw new KeyNotFoundException("Cliente não encontrado");
+
+        cliente.StatusProposta = sucesso ? Status.ProcessadoComSucesso : Status.ErroNoProcessamento;
+        await _clienteRepository.UpdateAsync(cliente);
     }
 
     protected virtual void Dispose(bool disposing)
