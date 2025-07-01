@@ -10,7 +10,7 @@ public static class MassTransitConfig
 {
     public static void AddMassTransitConfiguration(this IServiceCollection services)
     {
-        
+        var rabbitHost = Environment.GetEnvironmentVariable("rabbitmq_url") ?? "localhost";
         services.AddMassTransit(x =>
         {
             x.AddConsumer<CartaoCreditoCadastradoConsumer>();
@@ -19,7 +19,7 @@ public static class MassTransitConfig
             x.AddConsumer<PropostaCreditoErroConsumer>();
             x.UsingRabbitMq((context, config) =>
             {
-                config.Host("localhost", "/", h =>
+                config.Host(rabbitHost, "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");

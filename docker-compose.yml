@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   postgres:
@@ -15,17 +13,65 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     restart: always
     ports:
-      - "5672:5672"     # Porta do protocolo AMQP
-      - "15672:15672"   # Interface web
+      - "5672:5672"     
+      - "15672:15672"   
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app-network
+
+  cliente-service:
+    build:
+      context: ./ClienteService
+      dockerfile: ./Dockerfile
+    environment:
+      postgre: Host=postgres;Port=5432;Username=postgres;Password=minha_senha;Database=clientesdb
+      rabbitmq_url: rabbitmq
+    depends_on:
+      - postgres
+      - rabbitmq
+    ports:
+      - "5080:8080"
+    networks:
+      - app-network
+
+  credito-service:
+    build:
+      context: ./CreditoService
+      dockerfile: ./Dockerfile
+    environment:
+      postgre: Host=postgres;Port=5432;Username=postgres;Password=minha_senha;Database=clientesdb
+      rabbitmq_url: rabbitmq
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - app-network
+
+  cartao-service:
+    build:
+      context: ./CartaoCreditoService
+      dockerfile: ./Dockerfile
+    environment:
+      postgre: Host=postgres;Port=5432;Username=postgres;Password=minha_senha;Database=clientesdb
+      rabbitmq_url: rabbitmq
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - app-network
 
 volumes:
   pgdata:
+
+networks:
+  app-network:

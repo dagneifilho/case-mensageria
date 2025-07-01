@@ -10,13 +10,15 @@ public static class MassTransitConfiguration
 {
     public static void ConfigureMassTransit(this IServiceCollection services)
     {
+
+        var rabbitHost = Environment.GetEnvironmentVariable("rabbitmq_url") ?? "localhost";
         services.AddMassTransit(x =>
         {
             x.AddConsumer<ClienteCadastradoConsumer>();
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", h =>
+                cfg.Host(rabbitHost, "/", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
