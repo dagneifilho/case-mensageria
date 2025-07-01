@@ -40,3 +40,27 @@ docker compose up --build
 | ClienteService API   | [http://localhost:5080](http://localhost:5080) | API de cadastro de clientes                |
 | RabbitMQ UI          | [http://localhost:15672](http://localhost:15672) | Interface de administração RabbitMQ (user:`guest`, senha:`guest`)        |
 | PostgreSQL           | localhost:5432            | Acesso ao banco (user: `postgres`, senha: `minha_senha`)         |
+
+
+## 🧪 Requisições de Teste
+
+### 🔸 Criar um cliente
+
+```bash
+curl --request POST \
+  --url http://localhost:5080/api/Clientes \
+  --header 'Content-Type: application/json' \
+  --header 'accept: */*' \
+  --data '{
+    "nome": "Nome Teste",
+    "email": "teste@teste.com"
+}'
+```
+
+### 🔸 Buscar clientes
+
+```bash
+curl --request GET \
+  --url http://localhost:5080/api/Clientes \
+  --header 'accept: */*'
+```
